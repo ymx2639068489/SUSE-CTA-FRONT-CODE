@@ -1,7 +1,6 @@
 <script setup>
 import { getRankList } from '@/api/algorithm.js'
 import { ref } from 'vue';
-import Pagination from '../../../components/pagination/Pagination.vue';
 const data = ref()
 getRankList().then(res => {
     console.log(res.data.list);
@@ -13,7 +12,7 @@ getRankList().then(res => {
         <template #header>
             <div id="score-rank-label">排行榜</div>
         </template>
-        <el-table :data="data" style="width: 100%; background-color: red;">
+        <el-table :data="data" style="width: 100%;">
             <el-table-column prop="id" label="Rank" width="80"></el-table-column>
             <el-table-column prop="major" label="专业" width="150"></el-table-column>
             <el-table-column prop="class" label="班级"></el-table-column>

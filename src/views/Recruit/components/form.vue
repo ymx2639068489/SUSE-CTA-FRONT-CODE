@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from '@vue/reactivity';
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 import { patch, post } from '@/requests/request.js'
 
@@ -70,13 +70,42 @@ const saveApplication = () => {
         })
     })
 }
+
+const notEmpty = (rule, value, callback) => {
+    if (value == "") {
+        callback(new Error('不能为空'))
+    } else {
+        callback()
+    }
+}
+
+const rules = {
+    inchPhoto: [{
+        validator: notEmpty, trigger: 'blur'
+    }],
+    firstChoice: [{ validator: notEmpty, trigger: 'blur' }],
+    secondChoice: [{ validator: notEmpty, trigger: 'blur' }],
+    isAdjust: [{ validator: notEmpty, trigger: 'blur' }],
+    isDeliver: [{ validator: notEmpty, trigger: 'blur' }],
+    curriculumVitae: [{ validator: notEmpty, trigger: 'blur' }],
+    reasonsForElection: [{ validator: notEmpty, trigger: 'blur' }],
+}
+
+const disabled = ref(true)
+
+
+watchEffect(() => {
+    if(formData.value.firstChoice != "" && formData.value.secondChoice != "") {
+        disabled.value = false
+    }
+})
 </script>
 <template>
     <el-card>
 
         <div class="header">志愿填报</div>
-        <el-form id="form" label-width="100px" label-position="left">
-            <el-form-item label="一寸照">
+        <el-form id="form" label-width="100px" label-position="left" :model="data" :rules="rules">
+            <el-form-item label="一寸照"  prop="inchPhoto">
                 <el-upload class="avatar-uploader" action="https://yibindfxy.top:444/application/upload/file"
                     :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload"
                     name="file[]">
@@ -86,25 +115,25 @@ const saveApplication = () => {
                     </el-icon>
                 </el-upload>
             </el-form-item>
-            <el-form-item label="第一志愿">
+            <el-form-item label="第一志愿" prop="firstChoice">
                 <el-select v-model="formData.firstChoice" size="large" @input="changeValue">
                     <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
                 </el-select>
             </el-form-item>
-            <el-form-item label="第二志愿">
+            <el-form-item label="第二志愿" prop="secondChoice">
                 <el-select v-model="formData.secondChoice" size="large" @input="changeValue">
                     <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
                 </el-select>
             </el-form-item>
-            <el-form-item label="是否接受调剂">
+            <el-form-item label="是否接受调剂" prop="isAdjust">
                 <el-switch v-model="formData.isAdjust" active-icon="Check" inactive-icon="Close" />
             </el-form-item>
-            <el-form-item label="个人简历">
-                <el-input type="textarea" v-model="formData.curriculumVitae" size="large" rows="6" @input="changeValue">
+            <el-form-item label="个人简历" prop="curriculumVitae">
+                <el-input type="textarea" v-model="formData.curriculumVitae" size="large" rows="3" @input="changeValue">
                 </el-input>
             </el-form-item>
-            <el-form-item label="竞选理由">
-                <el-input type="textarea" v-model="formData.reasonsForElection" size="large" rows="6"
+            <el-form-item label="竞选理由" prop="reasonsForElection">
+                <el-input type="textarea" v-model="formData.reasonsForElection" size="large" rows="3"
                     @input="changeValue"></el-input>
             </el-form-item>
         </el-form>
@@ -112,10 +141,10 @@ const saveApplication = () => {
             取消投递
         </el-button>
         <div v-else id="btn-group">
-            <el-button class="btn" type="primary" size="large" @click="deliverApplication">
+            <el-button class="btn" type="primary" size="large" @click="deliverApplication" :disabled="disabled">
                 投递志愿
             </el-button>
-            <el-button class="btn" type="success" size="large" @click="saveApplication">
+            <el-button class="btn" type="success" size="large" @click="saveApplication" :disabled="disabled">
                 保存志愿
             </el-button>
 

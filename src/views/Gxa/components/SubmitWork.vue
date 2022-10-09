@@ -4,7 +4,9 @@ import { UploadCodeZip, UploadOther, GetOther } from '@/api/gxaWork.js'
 import {
     FileZipOutlined,
 } from '@ant-design/icons-vue'
+import {getTeamInfo} from '@/api/gxaWork.js';
 import { ElMessage } from 'element-plus';
+import Tips from './Tips.vue';
 
 const uploadSuccess = (res) => {
     let data = res.data[0];
@@ -30,6 +32,8 @@ const handleCodeUpload = (options) => {
 }
 
 const submit = () => {
+    otherData.value.githubUrl = otherData.value.githubUrl?otherData.value.githubUrl:"1111"
+    otherData.value.websiteUrl = otherData.value.websiteUrl?otherData.value.websiteUrl:"1111"
     UploadOther(otherData.value).then(res => {
         ElMessage({
             type: "success",
@@ -38,21 +42,31 @@ const submit = () => {
     })
     init()
 }
+const Static = ref(true);
+
+const status = ref(true)
 
 const init = () => {
     GetOther().then(res => {
-        console.log(res)
-        otherData.value.githubUrl = res.githubUrl
+        otherData.value.githubUrl = res.data.data.githubUrl
+        otherData.value.websiteIntroduction = res.data.data.websiteIntroduction
+        otherData.value.websiteUrl = res.data.data.websiteUrl
+        otherData.value.showImg = res.data.data.showImg
     }).catch(err => {
-
+        if(err.response.data.code == -1) 
+            status.value = false
     })
+    getTeamInfo().then(res => {
+        Static.value = !res.data.data.group;
+    })
+    
 }
 init()
 
 
 </script>
 <template>
-    <div id="submit-work-root">
+    <div v-if="status" id="submit-work-root">
         <div id="submit-work-main">
             <div id="submit-work-title">
                 <span>提交作品</span>
@@ -75,7 +89,7 @@ init()
                         </el-icon>
                     </el-upload>
                 </el-form-item>
-                <el-form-item class="submit-work-item">
+                <el-form-item v-if="Static" class="submit-work-item">
                     <template #label>
                         <file-zip-outlined :style="{fontSize: '36px', lineHeight: '36px'}" />
                         <span class="submit-item-title">代码压缩包</span>
@@ -109,35 +123,32 @@ init()
 
                     </el-input>
                 </el-form-item>
-                <el-form-item class="submit-work-item">
+                <el-form-item v-if="!Static" class="submit-work-item">
                     <template #label>
                         <el-icon :size="36">
                             <Link />
                         </el-icon>
                         <span class="submit-item-title">网站地址</span>
-
                     </template>
                     <el-input v-model="otherData.websiteUrl">
-
                     </el-input>
                 </el-form-item>
-                <el-form-item class="submit-work-item">
+                <el-form-item v-if="!Static" class="submit-work-item">
                     <template #label>
                         <img src="/src/assets/svg/github.svg" alt="" style="width: 36px;">
                         <span class="submit-item-title">作品github地址</span>
 
                     </template>
                     <el-input v-model="otherData.githubUrl">
-
                     </el-input>
                 </el-form-item>
-
                 <el-form-item>
                     <el-button type="primary" @click="submit">提交基本信息</el-button>
                 </el-form-item>
             </el-form>
         </div>
     </div>
+    <Tips v-else></Tips>
 </template>
 
 <style scoped>
@@ -175,7 +186,7 @@ init()
 }
 
 .web-site-img {
-    width: 150px;
-    aspect-ratio: 1 / 1;
+    width: 250px;
+    aspect-ratio: 2 / 1;
 }
 </style>

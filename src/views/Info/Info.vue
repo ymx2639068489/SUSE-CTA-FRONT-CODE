@@ -21,7 +21,7 @@ const handleAvatarSuccess = (response) => {
 }
 </script>
 <template>
-    <div class="info-box">
+    <div id="info-container">
         <el-row>
             <el-col :span="8" style="display:flex; justify-content: center;">
                 <el-upload id="avatar-box" action="https://yibindfxy.top:444/application/upload/file"
@@ -58,5 +58,9 @@ const handleAvatarSuccess = (response) => {
 
 #profil {
     margin-top: 40px;
+}
+
+#info-container {
+    /* background-color: red; */
 }
 </style>

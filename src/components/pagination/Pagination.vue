@@ -6,7 +6,7 @@ const list = ref([])
 const currentPage = ref(1)
 const total = ref(0)
 const init = () => {
-    props.api(currentPage.value, 20).then(res => {
+    props.api(currentPage.value, 10).then(res => {
         list.value = res.data.list
         total.value = res.data.total
         emit('getData', list.value)

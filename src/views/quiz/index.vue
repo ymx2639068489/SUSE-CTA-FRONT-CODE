@@ -22,7 +22,7 @@ isRunningActive('computer_knowledge_competition').then(res => {
 
 </script>
 <template>
-    <div style="display:flex; justify-content: center; margin-top: 20px;">
+    <div style="display:flex; justify-content: center;">
         <div id="quiz-other-container">
             <Introdution></Introdution>
             <el-button :disabled="!enable" type="primary" id="quzi-start-bnt" @click="ClickstartExam">立即参赛</el-button>
@@ -34,19 +34,22 @@ isRunningActive('computer_knowledge_competition').then(res => {
 #quiz-rank-container {
     width: 45%;
     margin-left: 20px;
+    /* background-color: red; */
 }
 
 
-#quiz-other-container {
+#quiz-other-container { 
     margin-left: 40px;
     width: 50%;
+    /* background-color: red; */
 }
 
 #quzi-start-bnt {
     width: 100%;
-    margin-top: 20px;
-    height: 80px;
+    margin-top: 10px;
     font-size: 46px;
+    height: 80px;
+    /* line-height: 2; */
     background-color: #0691C4;
 }
 </style>

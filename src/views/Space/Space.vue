@@ -8,8 +8,8 @@ const name = computed(() => store.getters.getUserInfo.username)
 
 </script>
 <template>
-    <div style="display:flex">
-        <div style="width:200px; height: 800px; display: inline-block; position: relative;">
+    <div style="display:flex; ">
+        <div style="width:200px;  display: inline-block; position: relative; ">
             <div style="position: absolute; top: 0px;">
                 <div class="title">
                     <div style="font-size: 2em;">Hi&nbsp;</div>
@@ -18,7 +18,6 @@ const name = computed(() => store.getters.getUserInfo.username)
                 <Sidebar @exit-account="dialogVisible = true"></Sidebar>
             </div>
         </div>
-
 
         <div style="padding: 0; width: 90%;">
             <RouterView></RouterView>

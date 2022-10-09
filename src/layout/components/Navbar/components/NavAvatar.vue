@@ -9,9 +9,30 @@ const userInfo = computed(() => store.getters.getUserInfo)
     <div>
         <el-popover trigger="hover" width="300px" effect="light" :show-arrow="false" :teleported="false">
             <template #reference>
-                <el-avatar :src="userInfo.avatarUrl"/>
+                <img v-if="userInfo.avatarUrl" id="nav-avatar-img" :src="userInfo.avatarUrl" />
+                <div v-else id="unLogin-avatal">
+                    <span style="margin:auto">登陆</span>
+                </div>
             </template>
             <UserCard style="z-index:3000"></UserCard>
         </el-popover>
     </div>
 </template>
+<style>
+#unLogin-avatal {
+    background-color: #0691C4;
+    color: white;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+#nav-avatar-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+</style>

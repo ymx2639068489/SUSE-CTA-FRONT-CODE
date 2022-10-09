@@ -1,6 +1,7 @@
 <script setup>
 import labImg from '@/assets/svg/award.svg'
 import svgLabel from '@/components/label/svgLabel.vue';
+import tool from '@/utils/assets.js'
 </script>
 <template>
     <div id="gxa-award-container">
@@ -11,11 +12,13 @@ import svgLabel from '@/components/label/svgLabel.vue';
                     <div class="gxa-award-title">
                         <el-icon :size="28"><CaretLeft /></el-icon>动态组<el-icon :size="28"><CaretRight /></el-icon>
                     </div>
+                    <img :src="tool.getAssetsFile(`award.png`)" alt="" style="height: 250px; width: 90%; ">
                 </div>
                 <div>
                     <div class="gxa-award-title">
                         <el-icon :size="28"><CaretLeft /></el-icon>静态组<el-icon :size="28"><CaretRight /></el-icon>
                     </div>
+                    <img :src="tool.getAssetsFile(`award.png`)" alt="" style="height: 250px; width: 90%;">
                 </div>
             </div>
         </div>
@@ -31,13 +34,14 @@ import svgLabel from '@/components/label/svgLabel.vue';
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    min-height: 600px;
 }
 
 #gxa-award {
     width: 90%;
     height: 600px;
 
-
+    user-select: none;
     background-color: white;
 
     border: 1px solid #e4e7ed;

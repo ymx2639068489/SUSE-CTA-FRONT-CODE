@@ -1,5 +1,5 @@
 <script setup>
-import {  ref } from "vue";
+import { ref } from "vue";
 import { useStore } from "vuex";
 import OptionButton from "../../../components/button/OptionButton.vue";
 import { getQuestionDetailByID } from '@/api/quiz.ts'
@@ -49,13 +49,12 @@ const choice = (o) => {
         ans = o
     }
     store.commit('setAns', { id: data.value.id, ans })
-    // store.getters.getAllAns
 }
 </script>
 <template>
-    <div v-if="data">
-        <div class="question-detail-lable">题目描述</div>
-        <div><span id="question-detail-topic">{{data.topic}}</span></div>
+    <div v-if="data" id="question-detail-continer">
+        <div class="question-detail-lable">题目描述({{data.type == 1? '单选题':data.type == 2 ? '多选题' :'判断题'}})</div>
+        <div id="question-detail-topic"><span>{{data.topic}}</span></div>
         <div class="question-detail-lable">题目选项</div>
         <div>
             <div v-if="data.type == 1 || data.type == 2">
@@ -118,6 +117,10 @@ const choice = (o) => {
     </div>
 </template>
 <style>
+#question-detail-continer {
+    /* background-color: #0691C4; */
+}
+
 .question-detail-lable {
     text-align: start;
     font-size: 24px;
@@ -135,7 +138,12 @@ const choice = (o) => {
 }
 
 #question-detail-topic {
-    font-size: 20px;
+    font-size: 22px;
+    line-height: 2.0;
     user-select: none;
+    /* background-color: red; */
+    width: 100%;
+    text-align: start;
+    padding: 15px;
 }
 </style>

@@ -14,7 +14,8 @@ function request(url, method, params, options = { loading: true, error: true }) 
         instance({
             url,
             method,
-            ...data
+            ...data,
+            
         }).then((res) => {
             resolve(res);
         }).catch((err) => {

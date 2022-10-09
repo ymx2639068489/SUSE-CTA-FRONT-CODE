@@ -4,6 +4,8 @@ import { useStore } from 'vuex';
 import QuestionGroup from './components/questionGroup.vue';
 import Question from './components/question.vue'
 import { submitAnswer } from '@/api/quiz.ts'
+import { ElMessage } from 'element-plus';
+import { useRouter } from 'vue-router';
 const store = useStore()
 const activeNames = ref(['1', '2', '3'])
 const ques = computed(() => store.getters.getQuestionData)
@@ -24,7 +26,6 @@ const nowQuestionID = ref(0)
 const currentQuestionIdx = ref('1')
 const currentQuestionType = ref(1)
 const toQuestion = ({ id, idx }, type) => {
-
     nowQuestionID.value = id
     currentQuestionIdx.value = idx
     currentQuestionType.value = type
@@ -32,6 +33,7 @@ const toQuestion = ({ id, idx }, type) => {
 }
 
 const pre = () => {
+    console.log(currentQuestionType.value, currentQuestionIdx.value)
     if (currentQuestionType.value == 1 && currentQuestionIdx.value == 0) return
     currentQuestionIdx.value--
     if (currentQuestionIdx.value == -1) {
@@ -40,7 +42,7 @@ const pre = () => {
         let t = [0, 39, 19, 19]
         currentQuestionIdx.value = t[currentQuestionType.value]
     }
-    nowQuestionID.value = currentQuestionType.value == 1 ? data.signalChoice[currentQuestionIdx.value] : currentQuestionType.value == 2 ? data.multiplyChoice[currentQuestionIdx.value] : data.judge[currentQuestionIdx.value]
+    nowQuestionID.value = currentQuestionType.value == 1 ? data.value.signalChoice[currentQuestionIdx.value] : currentQuestionType.value == 2 ? data.value.multiplyChoice[currentQuestionIdx.value] : data.value.judge[currentQuestionIdx.value]
 }
 
 const next = () => {
@@ -51,13 +53,30 @@ const next = () => {
         currentQuestionType.value++
         currentQuestionIdx.value = 0
     }
-    nowQuestionID.value = currentQuestionType.value == 1 ? data.signalChoice[currentQuestionIdx.value] : currentQuestionType.value == 2 ? data.multiplyChoice[currentQuestionIdx.value] : data.judge[currentQuestionIdx.value]
+    nowQuestionID.value = currentQuestionType.value == 1 ? data.value.signalChoice[currentQuestionIdx.value] : currentQuestionType.value == 2 ? data.value.multiplyChoice[currentQuestionIdx.value] : data.value.judge[currentQuestionIdx.value]
 }
+
+const router = useRouter();
 
 const submitAns = () => {
     let ansMap = computed(() => store.getters.getAllAns)
     submitAnswer(Object.fromEntries(ansMap.value)).then(res => {
         console.log(res);
+        ElMessage({
+            type:"sucess",
+            message: "提交成功",
+        })
+        router.push("/quiz")
+        
+    }).catch(err => {
+        if(err.code == -4) {
+            router.push("/quiz")
+            return;
+        }
+        ElMessage({
+            type:"error",
+            message: err.message,
+        })
     })
 }
 onMounted(init)

@@ -13,7 +13,6 @@ const data = ref({
     title: "",
 })
 getJournalismDetail(id).then(res => {
-    console.log(res);
     data.value = res.data.data
     data.value.time = formatDate(data.value.time)
 })
@@ -36,7 +35,7 @@ const goBack = () => {
                 <div class="news-info-item">作者:{{data.author}}</div>
                 <div class="news-info-item">发布时间:{{data.time}}</div>
             </div>
-            <div id="news-content">{{data.content}}</div>
+            <div id="news-content" v-html="data.content"></div>
         </el-card>
     </div>
 

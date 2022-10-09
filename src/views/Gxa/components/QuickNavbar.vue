@@ -15,11 +15,6 @@
                 <span>比赛流程</span>
             </div>
         </a>
-        <a href="#previous-work" class="quick-bar-item-container">
-            <div class="quick-bar-item">
-                <span>往届作品</span>
-            </div>
-        </a>
     </div>
 </template>
 <style scoped>

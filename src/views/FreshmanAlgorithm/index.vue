@@ -29,20 +29,18 @@ isRunningActive('newborn_algorithm_competition').then(res => {
 
 #algo-container {
     display: flex;
-    margin-top: 20px;
     justify-content: center;
 }
 
 #algo-other-container {
     width: 50%;
-    margin-left: 40px;
+    margin-left: 20px;
 }
 
 #algo-btn {
     width: 100%;
-    height: 80px;
-    line-height: 1;
-    margin-top: 20px;
+    height: 55px;
+    margin-top: 10px;
     font-size: 40px;
     background-color: #449D44;
     color: white;

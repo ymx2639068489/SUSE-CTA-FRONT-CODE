@@ -32,9 +32,9 @@ const toNewsDetail = (id) => {
             <el-table-column prop="time" min-width="200" label="发布时间" />
             <el-table-column min-width="100">
                 <template #default="scope">
-                    <el-buttion link type="primary" size="small" @click.prevent="toNewsDetail(scope.row.id)">
+                    <el-button text type="primary" size="small" @click.prevent="toNewsDetail(scope.row.id)">
                         查看详细
-                    </el-buttion>
+                    </el-button>
                 </template>
             </el-table-column>
         </el-table>

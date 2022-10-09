@@ -22,6 +22,7 @@
 </template>
 <style>
 #algo-intruduction-text {
+    margin-top: -20px;
     text-align: start;
     color: #1e5164;
 }

@@ -1,7 +1,8 @@
 <script setup>
 import { ElMessage } from 'element-plus';
 import { ref } from 'vue';
-import { Delete, get, patch, post, put } from '../../../requests/request';
+import { Delete, get, patch, post, put } from '@/requests/request';
+import {getTeamInfo} from '@/api/gxaWork.js';
 import TeamCardParticipator from './TeamCardParticipator.vue';
 const teamInfo = ref({})
 const creatTeam = () => {
@@ -17,8 +18,7 @@ const creatTeam = () => {
 }
 const state = ref(0)
 const init = () => {
-    get('/api/gxa_application/getTeamInfo').then(res => {
-        console.log(res.data)
+    getTeamInfo().then(res => {
         teamInfo.value = res.data.data
         state.value = 1;
         get('/api/gxa_application/isLeader').then(res2 => {
@@ -62,11 +62,18 @@ const submitInfo = () => {
 }
 const emit = defineEmits(['expand', 'close'])
 const updateTeamInfo = () => {
+    console.log({
+        workName: teamInfo.value.workName,
+        teamName: teamInfo.value.teamName,
+        group: teamInfo.value.group,
+        teamMemberSpecialty: teamInfo.value.teamMemberSpecialty,
+        introductionToWorks: teamInfo.value.introductionToWorks,
+    });
     put('/api/gxa_application/updateGxaApplicationForm', {
         workName: teamInfo.value.workName,
         teamName: teamInfo.value.teamName,
         group: teamInfo.value.group,
-        teamMemberSpecialty: teamInfo.value.teamMumberSpecialty,
+        teamMemberSpecialty: teamInfo.value.teamMemberSpecialty,
         introductionToWorks: teamInfo.value.introductionToWorks,
     }).then(res => {
         ElMessage({

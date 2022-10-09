@@ -1,8 +1,9 @@
 <script setup>
-import { get, Delete } from '@/requests/request';
+import { Delete } from '@/requests/request';
 import { ElMessage } from 'element-plus';
 import { ref } from 'vue'
 import { patch, post } from '@/requests/request';
+import { getMessage, getNotRead } from '@/api/message';
 
 const messages = ref([])
 const formData = ref({
@@ -11,13 +12,9 @@ const formData = ref({
 })
 
 const loadMessage = () => {
-
-    get('/api/message', formData.value, {
-        loading: false
-    }).then(res => {
+    getMessage(formData).then(res => {
         let data = res.data.data
         messages.value.splice(0, messages.value.length, ...data)
-
     })
 }
 
@@ -49,6 +46,7 @@ const showMessage = (event, item) => {
         showBtn.value = false
     }
 }
+
 const deleteMessage = (event, item) => {
     Delete('/api/message/' + item.id).then(res => {
         ElMessage({ type: 'success', message: res.data.message })
@@ -89,13 +87,21 @@ const callback = (event, item) => {
             agreeGxaInvitation(item)
     }
 }
+
+const status = ref(false)
+
+getNotRead().then(res => {
+    status.value = res.data.data
+})
 </script>
 
 <template>
     <div class="message-continer">
-        <el-icon :size="36" @click="showMessageBox" >
-            <ChatDotSquare />
-        </el-icon>
+        <el-badge :value="status?'new':''">
+            <el-icon :size="36" @click="showMessageBox">
+                <ChatDotSquare />
+            </el-icon>
+        </el-badge>
         <el-dialog v-model="isShowMessageBox" :draggable="true" :modal="false" width="1000px" :append-to-body="true"
             :lock-scroll="false">
             <template #header>
@@ -121,34 +127,35 @@ const callback = (event, item) => {
                                             <img id="avatar" :src="item.from.avatarUrl" alt="avatar">
                                         </div>
                                         <div id="info">
-                                            {{  item.from.username  }}
+                                            {{ item.from.username }}
                                         </div>
                                     </div>
                                     <el-badge v-if="item.isRead == false" is-dot>
                                         <div style="height:30px"></div>
                                     </el-badge>
-                                    
+
                                 </el-menu-item>
                             </el-scrollbar>
                         </el-menu>
                     </div>
-                    <el-divider direction="vertical" style="height: 400px" >
+                    <el-divider direction="vertical" style="height: 400px">
 
                     </el-divider>
                     <div style="position: relative;">
-                        <el-card v-if="isSelect" style=" background-color: white; height: 100%; width:650px;  margin-left: 20px;">
+                        <el-card v-if="isSelect"
+                            style=" background-color: white; height: 100%; width:650px;  margin-left: 20px;">
                             <div
                                 style="background-color:#0691C4; color: white; font-size: 22px; margin-bottom: 0.5em; text-align: center; position:  sticky; top:0; z-index: 1000;">
-                                <span>{{  message.from.username  }}</span>
+                                <span>{{ message.from.username }}</span>
                             </div>
                             <el-scrollbar>
                                 <div style="font-size: 18px; text-indent: 2em;">
-                                    {{  message.content  }}
+                                    {{ message.content }}
                                 </div>
                             </el-scrollbar>
                             <div v-if="showBtn" id="footer">
                                 <el-button id="btn" type="primary" :disabled="disabled"
-                                    @click="callback($event, message)">{{  btnText  }}</el-button>
+                                    @click="callback($event, message)">{{ btnText }}</el-button>
                             </div>
                         </el-card>
                     </div>
@@ -158,14 +165,9 @@ const callback = (event, item) => {
     </div>
 </template>
 <style scoped>
+.message-continer {}
 
-.message-continer {
-    /* width: 100px;
-    height: 100px; */
-    /* background-color: red; */
-}
 .menu {
-    /* background-color: red; */
     width: 260px;
     height: 400px;
     overflow: auto;
@@ -235,4 +237,5 @@ const callback = (event, item) => {
 </style>
 
 <style>
+
 </style>

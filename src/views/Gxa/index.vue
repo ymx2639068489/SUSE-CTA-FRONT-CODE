@@ -4,15 +4,23 @@ import TeamCard from './components/TeamCard.vue';
 import GroupInfo from './components/GroupInfo.vue';
 import Introduction from './components/Introduction.vue';
 import Award from './components/Award.vue';
-import PreviousWork from './components/PreviousWork.vue';
 import QuickNavbar from './components/QuickNavbar.vue';
 import Process from './components/Process.vue';
+import { getGxaBanner } from '@/api/banner.js';
 const styleState = ref(true)
 const changeTeamCardStyle = () => {
     styleState.value = !styleState.value
 }
-
 const isShowTeamCard = ref(false)
+
+const carouselData = ref([])
+
+
+getGxaBanner().then(res => {
+    let list = res.data.data;
+    carouselData.value = list;
+})
+
 
 </script>
 <template>
@@ -25,10 +33,13 @@ const isShowTeamCard = ref(false)
         <TeamCard v-if="isShowTeamCard" :class="{'team-card-one': styleState, 'team-card-tow' : !styleState}"
             @expand="changeTeamCardStyle" @close="isShowTeamCard = false">
         </TeamCard>
+
         <div class="gxa-container">
             <el-carousel id="gxa-carousel" height="50vh">
-                <el-carousel-item v-for="item in 4" :key="item">
-                    <h3>{{item}}</h3>
+                <el-carousel-item v-for="item in carouselData" :key="item">
+                    <a :href="item.href" target="_blank">
+                        <el-image :src="item.url" fit="fill"></el-image>
+                    </a>
                 </el-carousel-item>
             </el-carousel>
         </div>
@@ -47,9 +58,6 @@ const isShowTeamCard = ref(false)
         <div class="gxa-container" id="process">
             <Process />
         </div>
-        <!-- <div class="gxa-container" id="previous-work">
-            <PreviousWork></PreviousWork>
-        </div> -->
     </div>
 </template>
 <style scoped>
@@ -59,8 +67,8 @@ const isShowTeamCard = ref(false)
 
 #root {
     width: 100%;
-
-}
+    min-width: 1600px;
+}   
 
 #gxa-team-btn {
     position: fixed;

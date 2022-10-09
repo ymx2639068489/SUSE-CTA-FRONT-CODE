@@ -25,10 +25,12 @@ import Footer from './components/Footer/index.vue';
 }
 
 .main {
-    min-height: 90vh;
+    /* min-height: 90vh; */
+    min-height: calc(100vh - 159px);
 }
 
 .footer {
     margin: auto;
+    height: 59px;
 }
 </style>

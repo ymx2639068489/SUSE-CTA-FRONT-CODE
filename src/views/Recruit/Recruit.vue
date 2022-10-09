@@ -9,7 +9,6 @@ onMounted(() => {
     get('/api/recruitment/getUserApplication').then(res => {
         let data = res.data.data;
         store.commit('setRecurit', data)
-
     })
 })
 </script>
@@ -27,8 +26,6 @@ onMounted(() => {
 }
 
 .recruit-review {
-    /* min-width: 800px; */
-    /* max-width: 850px; */
     width: 60%;
     margin-left: 5%;
 }

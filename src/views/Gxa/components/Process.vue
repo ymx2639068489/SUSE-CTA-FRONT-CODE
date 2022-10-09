@@ -5,20 +5,22 @@ import { ref } from 'vue'
 import labImg from '@/assets/svg/process.svg'
 import SubmitWork from './SubmitWork.vue'
 import FirstAudit from './firstAudit.vue';
-import FinalScore from './FinalScore.vue';
-const nowActiveStep = ref(1)
+import DetailStep from './DetailStep.vue';
+import WorkShow from './workShow.vue';
+import FinalCompetition from './FinalCompetition.vue';
+import FinalRank from './FinalRank.vue';
+const nowActiveStep = ref(-1)
 const step = [
     'GXA_register',
     'GXA_works',
-    'GXA_works_scoring',
     'GXA_approve',
+    'GXA_works_scoring',
     'GXA_finals',
     'GXA_end'
 ]
 queryGxaStep().then(res => {
     step.forEach((v, idx) => {
         if (v == res.data.data) {
-
             nowActiveStep.value = idx
         }
     })
@@ -76,13 +78,13 @@ queryGxaStep().then(res => {
                 </el-steps>
                 <div id="gxa-process-main">
                     <div v-if="nowActiveStep == 0" id="gxa-process-setp-one">
-                        报名详细流程
+                        <DetailStep></DetailStep>
                     </div>
-                    <SubmitWork v-if="nowActiveStep == 1"></SubmitWork>
-                    <FirstAudit v-if="nowActiveStep == 2"></FirstAudit>
-                    <div v-if="nowActiveStep == 3">作品公示</div>
-                    <div v-if="nowActiveStep == 4">决赛比拼</div>
-                    <FinalScore v-if="nowActiveStep == 5"></FinalScore>
+                    <SubmitWork v-else-if="nowActiveStep == 1"></SubmitWork>
+                    <FirstAudit v-else-if="nowActiveStep == 2"></FirstAudit>
+                    <WorkShow v-else-if="nowActiveStep == 3"> </WorkShow>
+                    <FinalCompetition v-else-if="nowActiveStep == 4"></FinalCompetition>
+                    <FinalRank v-else></FinalRank>
                 </div>
             </div>
         </div>
@@ -114,5 +116,6 @@ queryGxaStep().then(res => {
 #process-step {
     height: 60px;
     padding: 0;
+    user-select: none;
 }
 </style>

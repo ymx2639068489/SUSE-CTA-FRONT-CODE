@@ -33,6 +33,7 @@
 }
 
 #quiz-introdution-detail {
+    margin-top: -20px;
     text-align: start;
     color: #1e5164;
 }

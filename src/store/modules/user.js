@@ -3,7 +3,7 @@ const User = {
     state() {
         return {
             loginStatus: false,
-            avatarUrl: "/profil.jpg",
+            avatarUrl: "",
             class: [],
             college: "",
             identity: { department: '', duty: "" },
@@ -24,7 +24,7 @@ const User = {
         },
         userExit(state) {
             state.loginStatus = false
-            state.avatarUrl = "/profil.jpg"
+            state.avatarUrl = ""
             localStorage.removeItem('token')
         },
         setUserToken(state, token) {

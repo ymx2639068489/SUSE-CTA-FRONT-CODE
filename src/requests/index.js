@@ -38,13 +38,14 @@ instance.interceptors.response.use(response => {
             type: "warning",
             message: "请登陆"
         })
+        localStorage.removeItem('token')
     } else {
         ElMessage({
             type: "error",
-            message: err.response.data.message
+            message: "err " + err.response.data.message
         })
     }
-    return Promise.resolve(err)
+    return Promise.reject(err)
 });
 
 

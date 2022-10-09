@@ -12,7 +12,7 @@ const init = (data) => {
 }
 </script>
 <template>
-    <el-card style="min-height: 80vh; position: relative;">
+    <el-card style="position: relative;">
         <template #header>
             <div id="ranklist-label">排行榜</div>
         </template>

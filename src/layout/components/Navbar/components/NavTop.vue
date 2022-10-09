@@ -54,6 +54,8 @@ const toHome = () => {
 #nav-top-avatar {
     border: 2px solid white;
     border-radius: 50%;
+    width: 36px;
+    height: 36px;
     animation: flash 2s;
     animation-iteration-count: infinite;
 }
