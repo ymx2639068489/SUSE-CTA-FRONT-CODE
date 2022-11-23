@@ -22,6 +22,7 @@ import Footer from './components/Footer/index.vue';
     z-index: 2000;
     position: sticky;
     top: 0;
+    width: 100%;
 }
 
 .main {

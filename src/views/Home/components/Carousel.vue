@@ -12,7 +12,7 @@ getHomeBanner().then(res => {
 <template>
     <el-carousel :height="props.height" type="card">
         <el-carousel-item v-for="item in carouselData" :key="item">
-            <img :src="item.url" style="object-fit:fill;">
+            <img :src="item.url" style="object-fit:fill; width: 100%; height: 100%;">
         </el-carousel-item>
     </el-carousel>
 </template>

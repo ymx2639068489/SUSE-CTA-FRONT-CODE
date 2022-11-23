@@ -3,7 +3,7 @@ const Info = () => import('@/views/Info/Info.vue')
 const Recruit = () => import('@/views/Recruit/Recruit.vue')
 const Layout = () => import('@/layout/index.vue')
 const Folder = () => import('@/views/404.vue')
-const ChangePwd = () => import('@/views/404.vue')
+const ChangePwd = () => import('@/views/changePwd/index.vue')
 export default [{
     path: "/space", component: Layout,
     children: [

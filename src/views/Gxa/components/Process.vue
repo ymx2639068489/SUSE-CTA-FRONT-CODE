@@ -84,7 +84,10 @@ queryGxaStep().then(res => {
                     <FirstAudit v-else-if="nowActiveStep == 2"></FirstAudit>
                     <WorkShow v-else-if="nowActiveStep == 3"> </WorkShow>
                     <FinalCompetition v-else-if="nowActiveStep == 4"></FinalCompetition>
-                    <FinalRank v-else></FinalRank>
+                    <FinalRank v-else-if="nowActiveStep == 5"></FinalRank>
+                    <div v-else>
+                        <h1>报名已结束,请完善您的作品</h1>
+                    </div>
                 </div>
             </div>
         </div>

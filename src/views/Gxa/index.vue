@@ -38,7 +38,7 @@ getGxaBanner().then(res => {
             <el-carousel id="gxa-carousel" height="50vh">
                 <el-carousel-item v-for="item in carouselData" :key="item">
                     <a :href="item.href" target="_blank">
-                        <el-image :src="item.url" fit="fill"></el-image>
+                        <img :src="item.url" style="object-fit:fill; width: 100%; height: 100%;">
                     </a>
                 </el-carousel-item>
             </el-carousel>
@@ -61,13 +61,10 @@ getGxaBanner().then(res => {
     </div>
 </template>
 <style scoped>
-* {
-    overflow-x: hidden;
-}
 
 #root {
     width: 100%;
-    min-width: 1600px;
+    /* min-width: 1600px; */
 }   
 
 #gxa-team-btn {

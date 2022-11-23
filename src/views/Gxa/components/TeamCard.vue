@@ -3,6 +3,7 @@ import { ElMessage } from 'element-plus';
 import { ref } from 'vue';
 import { Delete, get, patch, post, put } from '@/requests/request';
 import {getTeamInfo} from '@/api/gxaWork.js';
+import {quitTeam} from '@/api/gxaTeam.js';
 import TeamCardParticipator from './TeamCardParticipator.vue';
 const teamInfo = ref({})
 const creatTeam = () => {
@@ -52,6 +53,7 @@ const cancelSubmitInfo = () => {
     })
 }
 const submitInfo = () => {
+    updateTeamInfo()
     get('/api/gxa_application/sureApplication').then(res => {
         ElMessage({
             type: "success",
@@ -62,13 +64,6 @@ const submitInfo = () => {
 }
 const emit = defineEmits(['expand', 'close'])
 const updateTeamInfo = () => {
-    console.log({
-        workName: teamInfo.value.workName,
-        teamName: teamInfo.value.teamName,
-        group: teamInfo.value.group,
-        teamMemberSpecialty: teamInfo.value.teamMemberSpecialty,
-        introductionToWorks: teamInfo.value.introductionToWorks,
-    });
     put('/api/gxa_application/updateGxaApplicationForm', {
         workName: teamInfo.value.workName,
         teamName: teamInfo.value.teamName,
@@ -94,6 +89,17 @@ const kickOut = (event, id) => {
         init();
     })
 }
+
+const clickQuitTeam = () => {
+    quitTeam().then(res => {
+        ElMessage({
+            type: "success",
+            message: res.data.message
+        })
+    })
+    init();
+}
+
 </script>
 <template>
     <el-card>
@@ -220,8 +226,7 @@ const kickOut = (event, id) => {
             <!-- footer button group -->
             <div class="team-card-footer-continer">
                 <div v-if="!teamInfo.isLeader" class="team-card-operator-group">
-                    <el-button type="danger">退出队伍</el-button>
-
+                    <el-button type="danger" @click="clickQuitTeam">退出队伍</el-button>
                 </div>
                 <div v-else class="team-card-operator-group">
                     <el-button v-if="teamInfo.isDeliver" type="info" @click="cancelSubmitInfo">取消提交团队信息</el-button>

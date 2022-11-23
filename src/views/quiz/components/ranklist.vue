@@ -24,7 +24,7 @@ const init = (data) => {
         <Pagination id="ranklist-pagination" :api="getRankList" @get-data="init"></Pagination>
     </el-card>
 </template>
-<style>
+<style scoped>
 #ranklist-pagination {
     position: absolute;
     bottom: 20px;

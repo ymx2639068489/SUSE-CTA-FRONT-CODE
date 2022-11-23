@@ -45,6 +45,11 @@ const showList = ref([
       username: '软件197熊鑫(22届会长)',
       contribution: '打嘴炮',
     },
+    {
+      timestamp: '2022/10/9',
+      username: '计科211梁媛媛(23届算法队干事)',
+      contribution: '素材制作',
+    }
   ],
 ])
 </script>

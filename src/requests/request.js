@@ -11,11 +11,12 @@ function request(url, method, params, options = { loading: true, error: true }) 
         if (method == 'get') data = { params };
         if (method == 'post') data = { data: params };
         if (method == 'put') data = { data: params };
+        if (method == 'patch') data = { data: params };
         instance({
             url,
             method,
             ...data,
-            
+
         }).then((res) => {
             resolve(res);
         }).catch((err) => {
@@ -42,7 +43,7 @@ function patch(url, params, options) {
     return request(url, 'patch', params, options)
 }
 
-function Delete (url, params, options) {
+function Delete(url, params, options) {
     return request(url, 'delete', params, options)
 }
 

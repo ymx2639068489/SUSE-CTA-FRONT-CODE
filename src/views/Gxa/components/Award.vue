@@ -6,22 +6,7 @@ import tool from '@/utils/assets.js'
 <template>
     <div id="gxa-award-container">
         <svgLabel :svg="labImg" title="奖项设置"></svgLabel>
-        <div id="gxa-award-body">
-            <div id="gxa-award">
-                <div>
-                    <div class="gxa-award-title">
-                        <el-icon :size="28"><CaretLeft /></el-icon>动态组<el-icon :size="28"><CaretRight /></el-icon>
-                    </div>
-                    <img :src="tool.getAssetsFile(`award.png`)" alt="" style="height: 250px; width: 90%; ">
-                </div>
-                <div>
-                    <div class="gxa-award-title">
-                        <el-icon :size="28"><CaretLeft /></el-icon>静态组<el-icon :size="28"><CaretRight /></el-icon>
-                    </div>
-                    <img :src="tool.getAssetsFile(`award.png`)" alt="" style="height: 250px; width: 90%;">
-                </div>
-            </div>
-        </div>
+        <img :src="tool.getAssetsFile('award.png')" alt="" id="gxa-award-img">
     </div>
 </template>
 <style scoped>
@@ -37,14 +22,15 @@ import tool from '@/utils/assets.js'
     min-height: 600px;
 }
 
-#gxa-award {
-    width: 90%;
-    height: 600px;
 
+
+#gxa-award-img {
+    width: 90%;
+    margin-top: 20px;
     user-select: none;
     background-color: white;
 
-    border: 1px solid #e4e7ed;
+    border: 0px solid #e4e7ed;
     border-radius: 5px;
 
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);

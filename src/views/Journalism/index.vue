@@ -40,7 +40,7 @@ const init = (data) => {
         </template>
         <el-table :data="items">
             <el-table-column prop="id" label="序号" />
-            <el-table-column prop="title" label="标题" min-width="300" @click="toNewsDetail" />
+            <el-table-column style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;width:100px;" prop="title" label="标题" min-width="300" @click="toNewsDetail" />
             <el-table-column prop="time" min-width="200" label="发布时间" />
             <el-table-column min-width="100">
                 <template #default="scope">
@@ -54,7 +54,7 @@ const init = (data) => {
     </el-card>
 </template>
 
-<style>
+<style scoped>
 #journalism-padgination {
     /* position: absolute; */
     bottom: 30px;

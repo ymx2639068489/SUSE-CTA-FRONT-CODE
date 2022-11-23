@@ -55,13 +55,9 @@ if ((navigator.userAgent.match(
           <Carousel id="carousel" height="90%" />
         </div>
         <div id="info-continer">
-          <div style="width: 90%; position: relative;">
-            <div id="hot-news" class="inline-block">
-              <HotNews />
-            </div>
-            <div id="contact-details" class="inline-block">
-              <ContactDetails />
-            </div>
+          <div style="width: 90%; position: relative; display: flex;">
+            <HotNews id="hot-news" class="inline-block" />
+            <ContactDetails id="contact-details" class="inline-block" />
           </div>
         </div>
       </div>
@@ -79,13 +75,13 @@ if ((navigator.userAgent.match(
 <style scoped>
 #hot-news {
   width: 65%;
-  height: 90%;
+  height: 100%;
 }
 
 #contact-details {
   margin-left: 5%;
   width: 30%;
-  height: 90%;
+  height: 100%;
 }
 
 #carousel-continer {

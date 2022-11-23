@@ -18,7 +18,6 @@ const name = computed(() => store.getters.getUserInfo.username)
                 <Sidebar @exit-account="dialogVisible = true"></Sidebar>
             </div>
         </div>
-
         <div style="padding: 0; width: 90%;">
             <RouterView></RouterView>
         </div>

@@ -9,11 +9,12 @@ function CancelSignUp() {
     return Delete('/api/newborn-algoirthm/cancellation')
 }
 
-function getRankList() {
-    let data = new Date()
-    return get('http://yumingxi.xyz:3100/api/previous_winners/getPreviousWinnersList',{
-        competitionName: "算法新生赛",
-        session: data.getFullYear(),
+function getRankList(group, studentId) {
+    let date = new Date().getFullYear()
+    return get('http://yumingxi.xyz:3100/api/algorithm-integral',{
+        semester: `${date}-${date+1}`,
+        group,
+        studentId
     })
 }
 

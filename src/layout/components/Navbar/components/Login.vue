@@ -5,6 +5,7 @@ import { ElMessage } from 'element-plus';
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex';
 import { encryptByMd5 } from '@/utils/encrypt.js'
+import { updateUserPaaword, sendVerificationCode } from "@/api/user"
 const emit = defineEmits(['toRegister', 'loginSuccess'])
 const router = useRouter()
 const store = useStore()
@@ -64,6 +65,35 @@ const smsLogin = () => {
     loginType.value = false
 }
 
+const changPwd = ref({
+    studentId: "",
+    password: "",
+    qq: "",
+    code: "",
+})
+
+const clickChangePwd = () => {
+    updateUserPaaword({
+        ...changPwd.value,
+        password: encryptByMd5(changPwd.value.password)
+    }).then(res => {
+        ElMessage({
+            type: "success",
+            message: res.data.message,
+        })
+    })
+}
+
+
+const sendVerifyCode = () => {
+
+    sendVerificationCode({qq: changPwd.value.qq, studentId: changPwd.value.studentId}).then(res => {
+        ElMessage({
+            type: "success",
+            message: res.data.message,
+        })
+    })
+}
 
 
 </script>
@@ -73,7 +103,7 @@ const smsLogin = () => {
             <el-space spacer="|">
                 <el-button :class="{ 'pwd-login': true, black: loginType }" type="primary" text @click="pwdLogin">密码登陆
                 </el-button>
-                <el-button :class="{ 'sms-login': true, black: !loginType }" type="primary" text @click="smsLogin">短信登陆
+                <el-button :class="{ 'sms-login': true, black: !loginType }" type="primary" text @click="smsLogin">忘记密码
                 </el-button>
             </el-space>
         </div>
@@ -89,7 +119,8 @@ const smsLogin = () => {
                 <template #label>
                     <span class="label">密码</span>
                 </template>
-                <el-input class="input" size="large" v-model="formData.password" placeholder="" show-password />
+                <el-input class="input" size="large" v-model="formData.password" placeholder="" show-password >
+                </el-input>
             </el-form-item>
             <el-form-item>
                 <div style="display: flex; justify-content: center; width: 100%">
@@ -101,31 +132,26 @@ const smsLogin = () => {
             </el-form-item>
         </el-form>
         <!-- 第二登陆方式 -->
-        <el-form v-else="loginType">
-            <el-form-item class="form">
-                <template #label>
-                    <span class="label">手机号 </span>
-                </template>
-
-                <el-input class="input" size="large" v-model="schoolNumber" placeholder="">
+        <el-form v-else="loginType"  label-position="top" :model="changPwd">
+            <el-form-item label="学号">
+                <el-input class="input" size="large" v-model="changPwd.studentId" placeholder=""/>
+            </el-form-item>
+            
+            <el-form-item class="form" label="qq">
+                <el-input class="input" size="large" v-model="changPwd.qq" placeholder="">
                     <template #append>
-                        <el-button text>发送验证码</el-button>
+                        <el-button text @click="sendVerifyCode">发送验证码</el-button>
                     </template>
                 </el-input>
             </el-form-item>
-            <el-form-item>
-                <template #label>
-                    <span class="label">验证码</span>
-                </template>
-                <el-input class="input" size="large" v-model="password" placeholder="" show-password />
+            <el-form-item label="验证码">
+                <el-input class="input" size="large" v-model="changPwd.code" placeholder=""/>
+            </el-form-item>
+            <el-form-item label="密码">
+                <el-input class="input" size="large" v-model="changPwd.password" placeholder="" show-password />
             </el-form-item>
             <el-form-item>
-                <el-col :span="12">
-                    <el-button class="btn" size="large" @click="clickRegisterBtn">注 册</el-button>
-                </el-col>
-                <el-col :span="12">
-                    <el-button class="btn" size="large" type="primary" @click="clickLoginBtn">登 录</el-button>
-                </el-col>
+                    <el-button class="btn" size="large" type="primary" @click="clickChangePwd">更改密码</el-button>
             </el-form-item>
         </el-form>
         <div class="footer">
@@ -163,7 +189,7 @@ const smsLogin = () => {
 
 .btn {
     font-size: 18px;
-    width: 90%;
+    width: 100%;
 }
 
 .pwd-login {

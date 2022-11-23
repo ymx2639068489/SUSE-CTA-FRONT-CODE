@@ -17,14 +17,13 @@ isRunningActive('newborn_algorithm_competition').then(res => {
         <ScoreRank id="algo-rank-container"></ScoreRank>
         <div id="algo-other-container">
             <Introduction></Introduction>
-            <el-button :disabled="!enable" id="algo-btn" @click="submit">报名新生算法赛</el-button>
         </div>
 
     </div>
 </template>
 <style>
 #algo-rank-container {
-    width: 45%;
+    width: 65%;
 }
 
 #algo-container {
@@ -33,7 +32,7 @@ isRunningActive('newborn_algorithm_competition').then(res => {
 }
 
 #algo-other-container {
-    width: 50%;
+    width: 30%;
     margin-left: 20px;
 }
 

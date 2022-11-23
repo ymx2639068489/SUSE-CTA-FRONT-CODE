@@ -63,5 +63,9 @@ const goBack = () => {
     word-wrap: break-word;
     word-break: break-all;
     font-size: 20px;
+    align-items:flex-start;
+    text-align:left;
 }
+
+
 </style>

@@ -40,7 +40,7 @@ const toNewsDetail = (id) => {
         </el-table>
     </el-card>
 </template>
-<style>
+<style scoped>
 .box-card {
     width: 100%;
     height: 100%;

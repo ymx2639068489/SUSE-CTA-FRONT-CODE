@@ -12,7 +12,7 @@ const formData = ref({
 })
 
 const loadMessage = () => {
-    getMessage(formData).then(res => {
+    getMessage(formData.value).then(res => {
         let data = res.data.data
         messages.value.splice(0, messages.value.length, ...data)
     })
@@ -23,8 +23,11 @@ const isShowMessageBox = ref(false)
 const showMessageBox = () => {
     isShowMessageBox.value = true
 }
+
 const message = ref({})
+
 const btnText = ref('确定')
+
 const showMessage = (event, item) => {
     // 标记消息已读
     if (item.isRead == false) {
@@ -59,6 +62,7 @@ const deleteMessage = (event, item) => {
         showBtn.value = false;
     })
 }
+
 const isSelect = ref(false)
 const showBtn = ref(false)
 const disabled = ref(false)
