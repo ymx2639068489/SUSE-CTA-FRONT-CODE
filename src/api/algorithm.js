@@ -9,10 +9,9 @@ function CancelSignUp() {
     return Delete('/api/newborn-algoirthm/cancellation')
 }
 
-function getRankList(group, studentId) {
-    let date = new Date().getFullYear()
+function getRankList(group, semester, studentId) {
     return get('http://yumingxi.xyz:3100/api/algorithm-integral',{
-        semester: `${date}-${date+1}`,
+        semester,
         group,
         studentId
     })

@@ -41,13 +41,8 @@ const showList = ref([
       contribution: '用户注册欢迎信',
     },
     {
-      timestamp: '2022/6/27',
-      username: '软件197熊鑫(22届会长)',
-      contribution: '打嘴炮',
-    },
-    {
       timestamp: '2022/10/9',
-      username: '计科211梁媛媛(23届算法队干事)',
+      username: '计科211梁媛媛(23届算法部干事)',
       contribution: '素材制作',
     }
   ],

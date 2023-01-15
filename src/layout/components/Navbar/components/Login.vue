@@ -119,7 +119,14 @@ const sendVerifyCode = () => {
                 <template #label>
                     <span class="label">密码</span>
                 </template>
-                <el-input class="input" size="large" v-model="formData.password" placeholder="" show-password >
+                <el-input
+                  class="input"
+                  size="large"
+                  v-model="formData.password"
+                  placeholder=""
+                  show-password
+                  @keydown.enter="clickLoginBtn"
+                >
                 </el-input>
             </el-form-item>
             <el-form-item>

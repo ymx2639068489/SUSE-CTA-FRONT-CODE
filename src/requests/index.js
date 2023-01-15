@@ -2,7 +2,6 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus'
 const instance = axios.create({
     baseURL: 'http://yumingxi.xyz:3002',
-    timeout: 3000,
     headers: {
         'Content-Type': 'application/json'
     }

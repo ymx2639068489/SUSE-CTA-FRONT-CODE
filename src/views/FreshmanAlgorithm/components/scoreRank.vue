@@ -4,9 +4,12 @@ import { ref, watch } from 'vue';
 const data = ref([])
 const row = ref([])
 const group = ref(true)
-watch(group, GetRankList)
+const semester = ref('');
+const semesters = ref([]);
+watch(group, GetRankList);
+watch(semester, GetRankList);
 function GetRankList() {
-    getRankList(!group.value).then(res => {
+    getRankList(!group.value, semester.value).then(res => {
         data.value = res.data.list.map((item, cnt) => {
             const _i = {
                 rank: cnt + 1,
@@ -26,7 +29,6 @@ function GetRankList() {
         }))
     })
 }
-GetRankList()
 function type(score) {
     const { description } = score
     if (description.includes('10')) return 'success'
@@ -34,14 +36,29 @@ function type(score) {
     if (description.includes('30')) return 'warning'
     return 'info'
 }
+(() => {
+  GetRankList()
+  let year = new Date().getFullYear(),
+      month = new Date().getMonth();
+  if (month < 9) semester.value = `${year - 1}-${year}`;
+  else semester.value = `${year}-${year + 1}`
+  for (let i = 2021; i <= year; i++) {
+    if (!(i === year && month < 9))
+      semesters.value.push(`${i}-${i + 1}`);
+  }
+})()
 </script>
 <template>
     <el-card class="box">
         <template #header>
             <div id="score-rank-label">排行榜</div>
             <el-switch v-model="group" class="mb-2" active-text="B组" inactive-text="A组" />
+            届数：
+            <el-select v-model="semester">
+              <el-option v-for="item of semesters" :key="item" :value="item" :label="item" />
+            </el-select>
         </template>
-        <el-table :data="data" style="width: 100%">
+        <el-table :data="data" style="width: 100%" max-height="700px">
             <el-table-column prop="rank" label="排名" width="80" fixed="left" />
             <el-table-column prop="major" label="专业" width="150" fixed="left" />
             <el-table-column prop="username" label="姓名" width="80" fixed="left" />
@@ -59,7 +76,6 @@ function type(score) {
                             </el-tag>
                         </template>
                     </el-popover>
-
                 </template>
             </el-table-column>
         </el-table>
