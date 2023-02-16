@@ -12,6 +12,6 @@ getTeamScore().then(res => {
     <div v-show="status">
         <div>恭喜您,您的团队的得分:(满分70分, 共四名老师打分)</div>
         <div>{{score}}</div>
-        <div>平均分：{{ score.reduce((p, v) => p + v, 0) / 4 }}</div>
+        <div>平均分：{{ score.reduce((p, v) => p + v, 0) / score.length }}</div>
     </div>
 </template>

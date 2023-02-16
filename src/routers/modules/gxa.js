@@ -9,5 +9,8 @@ export default [{
             component: Gxa,
             meta: { title: '国信安' },
         }
-    ]
+    ],
+}, {
+  path: "/invite",
+  component: () => import("@/views/Gxa/invite.vue"),
 }]
