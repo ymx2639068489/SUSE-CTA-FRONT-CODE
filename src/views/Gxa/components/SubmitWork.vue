@@ -8,7 +8,8 @@ import Tips from "./Tips.vue";
 
 const uploadSuccess = (res) => {
   let data = res.data[0];
-  otherData.value.showImg = data.Host + "/" + data.RelativePath;
+  console.log(data);
+  otherData.value.indexHtmlImg = data.host + "/" + data.path;
 };
 
 const otherData = ref({
@@ -18,17 +19,6 @@ const otherData = ref({
   githubUrl: "",
 });
 const status = ref(-1);
-
-const handleCodeUpload = (options) => {
-  const formData = new FormData();
-  formData.append("file", options.file);
-  UploadCodeZip(formData).then((res) => {
-    ElMessage({
-      type: "success",
-      message: res.data.message,
-    });
-  });
-};
 
 const submit = () => {
   UploadOther(otherData.value).then((res) => {
@@ -79,29 +69,29 @@ init();
             </el-icon>
             <span class="submit-item-title"> 网站首页截图 </span>
           </template>
-          <!-- <el-upload
+          <el-upload
             class="avatar-uploader"
-            action="https://yibindfxy.top:444/application/upload/file"
+            action="http://yibindfxy.top:444/file/upload"
             :show-file-list="false"
-            name="file[]"
+            name="file"
             accept=".jpg,.jpeg,.png"
             :on-success="uploadSuccess"
           >
             <img
-              v-if="otherData.showImg"
-              :src="otherData.showImg"
+              v-if="otherData.indexHtmlImg"
+              :src="otherData.indexHtmlImg"
               class="web-site-img"
             />
             <el-icon v-else class="avatar-uploader-icon" :size="40">
               <Plus />
             </el-icon>
-          </el-upload> -->
-          <el-input
+          </el-upload>
+          <!-- <el-input
             type="textarea"
             rows="4"
             v-model="otherData.indexHtmlImg"
           >
-          </el-input>
+          </el-input> -->
         </el-form-item>
         <!-- <el-form-item v-if="Static" class="submit-work-item">
           <template #label>

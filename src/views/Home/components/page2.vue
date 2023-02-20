@@ -61,6 +61,8 @@ const competitionList = ref([
 .box{
   position: relative;
   color: black;
+  width: 100%;
+  height: 100%;
 }
 .card{
   float: left;
@@ -86,10 +88,8 @@ const competitionList = ref([
   transition: .5s;
   backface-visibility: hidden;
   text-align: center;
-  line-height: 2;
-  font-size: 35px;
   font-weight: 800;
-  justify-content: center;
+  margin: auto;
 }
 .card .back{
   position: absolute;
@@ -100,9 +100,7 @@ const competitionList = ref([
   transition: .5s;
   transform: rotateY(-180deg);
   backface-visibility: hidden;
-  text-align: center;
-  font-size: 24px;
-  justify-content: center;
+  margin: auto;
 }
 .card:hover .face{
   transform: rotateY(-180deg);

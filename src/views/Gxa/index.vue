@@ -44,12 +44,13 @@ getGxaBanner().then((res) => {
     </TeamCard>
 
     <div class="gxa-container">
-      <el-carousel id="gxa-carousel" height="50vh">
-        <el-carousel-item v-for="item in carouselData" :key="item">
-          <a :href="item.href" target="_blank">
+      <el-carousel id="gxa-carousel" height="60vh">
+        <el-carousel-item v-for="item in carouselData" :key="item.url">
+          <a :href="item.href">
             <img
               :src="item.url"
               style="object-fit: fill; width: 100%; height: 100%"
+              alt="加载中"
             />
           </a>
         </el-carousel-item>

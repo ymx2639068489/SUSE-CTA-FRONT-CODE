@@ -2,48 +2,12 @@
 import Carousel from './components/Carousel.vue';
 import HotNews from './components/HotNews.vue';
 import ContactDetails from './components/ContactDetails.vue';
-import page2Cpm from './components/page2.vue'
-import page3Cpm from './components/page3.vue'
-import { onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
-const router = useRouter()
-const page1 = ref()
-const page3 = ref()
-const page4 = ref()
-const container = ref()
-const pageOffsetTopList = []
-let last, idx = 0;
-window.onresize = function () {
-  // 只有首页需要控制
-  if (router.currentRoute.value.path === '/') location.reload();
-}
-function fn(event) {
-  event.preventDefault && event.preventDefault()
-  let now = new Date().getTime()
-  if (!last || now - last >= 500) {
-    if (event.deltaY > 0 && idx < 2) {
-      container.value.scrollTo({ top: pageOffsetTopList[++idx], left: 0, behavior: 'smooth' })
-      last = now
-    }
-    if (event.deltaY < 0 && idx > 0) {
-      if (idx > 0) {
-        container.value.scrollTo({ top: pageOffsetTopList[--idx], left: 0, behavior: 'smooth' })
-        last = now
-      }
-    }
-  }
-}
-
-function init() {
-  pageOffsetTopList.push(page1.value.offsetTop)
-  pageOffsetTopList.push(page3.value.offsetTop)
-  pageOffsetTopList.push(page4.value.offsetTop)
-}
-onMounted(init)
+import page2Cpm from './components/page2.vue';
+import page3Cpm from './components/page3.vue';
 if ((navigator.userAgent.match(
   /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
 )) {
-  alert('尽量使用电脑浏览哦')
+  alert('尽量使用电脑浏览哦');
 }
 </script>
 
@@ -61,13 +25,9 @@ if ((navigator.userAgent.match(
           </div>
         </div>
       </div>
-      <div ref="page3" class="page page3">
-        <page2Cpm />
-      </div>
-      <div ref="page4" class="page page4">
-        了解更多: 贡献者
-        <page3Cpm />
-      </div>
+      <page2Cpm />
+      <br />
+      <page3Cpm />
     </div>
   </div>
 </template>

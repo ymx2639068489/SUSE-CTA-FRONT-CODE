@@ -1,4 +1,5 @@
 <template>
+  了解更多：
   <div class="box">
     <el-timeline v-for="(item, idx) in showList" :key="idx">
       <el-timeline-item
