@@ -9,7 +9,7 @@ const store = useStore()
 const info = computed(() => store.getters.getUserInfo)
 const handleAvatarSuccess = (response) => {
     let data = response.data[0];
-    info.value.avatarUrl = data.Host + "/" + data.RelativePath
+    info.value.avatarUrl = data.host + "/" + data.path
     put('/api/users/updateUserInfo', {
         avatarUrl: info.value.avatarUrl
     }).then(res => {
@@ -24,8 +24,8 @@ const handleAvatarSuccess = (response) => {
     <div id="info-container">
         <el-row>
             <el-col :span="8" style="display:flex; justify-content: center;">
-                <el-upload id="avatar-box" action="https://yibindfxy.top:444/application/upload/file"
-                    :show-file-list="false" :on-success="handleAvatarSuccess" name="file[]">
+                <el-upload id="avatar-box" action="http://yibindfxy.top:444/file/upload"
+                    :show-file-list="false" :on-success="handleAvatarSuccess" name="file">
                     <div id="avatar-box">
                         <Avatar :avatar="info.avatarUrl">
                             <template #mask-text>

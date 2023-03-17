@@ -11,6 +11,7 @@ import Space from './modules/space.js'
 import Journalism from './modules/journalism.js'
 import Quiz from './modules/quiz.js'
 import FreshmanAlgorithm from './modules/freshmanAlgorithm.js'
+import youngStudy from './modules/youngStudy.js';
 const Layout = () => import('@/layout/index.vue')
 
 const routes = [
@@ -31,6 +32,7 @@ const routes = [
     ...Journalism,
     ...Quiz,
     ...FreshmanAlgorithm,
+    ...youngStudy,
 ]
 
 const router = createRouter({

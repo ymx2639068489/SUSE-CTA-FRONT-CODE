@@ -4,10 +4,13 @@ import { ref } from "vue";
 
 const dynamicList = ref([]);
 const staticList = ref([]);
+const staticSelect = ref([]);
+const dynamicSelect = ref([]);
 getFinallyList().then((res) => {
-  console.log(res.data.data);
   dynamicList.value = res.data.data.dynamicList;
   staticList.value = res.data.data.staticList;
+  staticSelect.value = res.data.data.staticTeacher;
+  dynamicSelect.value = res.data.data.dynamicTeacher;
 });
 </script>
 
@@ -18,6 +21,7 @@ getFinallyList().then((res) => {
     </div>
     <h3>动态组</h3>
     <el-table id="final-competition-rank" :data="dynamicList">
+      <el-table-column type="index" width="50" />
       <el-table-column prop="teamName" label="团队名称" align="center" />
       <el-table-column prop="workName" label="作品名称" align="center" />
       <el-table-column prop="leader.username" label="队员1" width="90" align="center" />
@@ -33,6 +37,7 @@ getFinallyList().then((res) => {
     </el-table>
     <h3>静态组(没有网络安全测试分)</h3>
     <el-table id="final-competition-rank" :data="staticList">
+      <el-table-column type="index" width="50" />
       <el-table-column prop="teamName" label="团队名称" align="center" />
       <el-table-column prop="workName" label="作品名称" align="center" />
       <el-table-column prop="leader.username" label="队员1" width="120" align="center" />

@@ -24,7 +24,7 @@ const menus = [
     }, {
         path: '/quiz',
         meta: {
-            title: "知识竞赛"
+            title: "基础赛"
         }
     }, {
         path: '/freshmanAlgorithm',
@@ -32,9 +32,14 @@ const menus = [
             title: "算法赛"
         }
     }, {
+        path: '/youngStudy',
+        meta: {
+            title: "大学习"
+        }
+    }, {
         path: '/space/info',
         meta: {
-            title: "个人中心"
+            title: "我的"
         }
     },
 ]
