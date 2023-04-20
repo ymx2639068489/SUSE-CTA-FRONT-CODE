@@ -1,11 +1,10 @@
 <script setup>
-import { useStore } from 'vuex';
-const store = useStore()
+import { useStore } from "vuex";
+const store = useStore();
 // 自动登陆
-if (localStorage.getItem('token') != '') {
-  store.dispatch('getUserData')
+if (localStorage.getItem("token") != "") {
+  store.dispatch("getUserData");
 }
-
 </script>
 
 <template>
@@ -18,6 +17,5 @@ if (localStorage.getItem('token') != '') {
 #navbar {
   height: 15vh;
 }
+
 </style>
-
-

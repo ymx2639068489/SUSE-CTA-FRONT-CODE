@@ -1,9 +1,13 @@
 import { createApp } from 'vue'
-import './style.css'
+import('./style.css')
 import { ElementPlus, ElementPlusIconsVue } from './design/element'
-import  Antd  from './design/ant'
+import Antd from './design/ant'
 import App from './App.vue'
-import router from './routers/router'
+import router from './routers/router';
+// console.log(window.location.pathname);
+if (!['/mobile_class', '/mobile_detail'].includes(window.location.pathname)) {
+  import('./media.css');
+}
 import store from './store'
 // import { createMonitor } from "./index.esm.js";
 // createMonitor({
