@@ -26,11 +26,11 @@ const exit = () => {
                 </el-icon>
                 个人信息
             </el-menu-item>
-            <el-menu-item index="folder" @click="toPath">
+            <!-- <el-menu-item index="folder" @click="toPath">
                 <el-icon>
                     <FolderOpened />
                 </el-icon>收藏夹
-            </el-menu-item>
+            </el-menu-item> -->
             <el-menu-item index="recruit" @click="toPath">
                 <el-icon>
                     <DocumentAdd />

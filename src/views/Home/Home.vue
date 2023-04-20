@@ -27,7 +27,7 @@ if ((navigator.userAgent.match(
       </div>
       <page2Cpm />
       <br />
-      <page3Cpm />
+      <!-- <page3Cpm /> -->
     </div>
   </div>
 </template>

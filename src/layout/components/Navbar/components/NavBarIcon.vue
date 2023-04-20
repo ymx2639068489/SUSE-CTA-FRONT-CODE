@@ -6,7 +6,7 @@
             <img src="@/assets/icon.jpg" alt="图片" class="icon-img" />
         </div>
         <div class="description-first">
-            <span class="description-first-text">计算机技术协会</span>
+            <span class="description-first-text">高校学科竞赛协同平台</span>
         </div>
         <div class="description-second">
             <span class="description-second-text">Computer Technology Association</span>

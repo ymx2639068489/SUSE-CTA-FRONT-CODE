@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <h2>协会主攻/举办/协办常见竞赛(按时间线排序)</h2>
+    <h2>主攻/举办/协办常见竞赛(按时间线排序)</h2>
     <el-card class="card" v-for="(item, idx) in competitionList" :key="idx">
       <div class="face">
         <span>{{ idx + 1 }}.{{ item.name }}</span>
